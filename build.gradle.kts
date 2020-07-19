@@ -11,6 +11,8 @@ buildscript {
 
         Plugins.buildscript.forEach { classpath(it) }
 
+        classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -22,9 +24,9 @@ allprojects {
         google()
         jcenter()
 
-        apply(plugin = "maven")
+        //apply(plugin = "maven")
 
-        group = "de.upjoin"
+        group = "com.github.upjoin"
     }
 
 }
