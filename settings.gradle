@@ -1,0 +1,7 @@
+include ':app'
+
+rootProject.name='Upjoin Android Demo'
+
+include ':upjoin_android_core'
+include ':upjoin_android_actions'
+include ':upjoin_android_repository'
