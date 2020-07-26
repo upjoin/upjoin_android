@@ -45,9 +45,7 @@ interface WebServiceInfoModule {
 
     companion object {
         const val MODULE_ID = "WebServiceInfoModule"
-
-        lateinit var instance: WebServiceInfoModule
     }
 }
 
-val webServiceInfoModule: WebServiceInfoModule by lazy { WebServiceInfoModule.instance }
+lateinit var webServiceInfoModule: WebServiceInfoModule

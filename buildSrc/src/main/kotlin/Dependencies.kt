@@ -32,7 +32,7 @@ object AndroidXLibs {
   private const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta8"
   private const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
   private const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-  private const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha06"
+  private const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha07"
 
   private const val livecycleVersion = "2.2.0"
   private const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$livecycleVersion"
@@ -51,7 +51,7 @@ object AndroidXLibs {
 }
 
 object GoogleLibs {
-  const val material = "com.google.android.material:material:1.3.0-alpha01"
+  const val material = "com.google.android.material:material:1.3.0-alpha02"
 }
 
 object ThirdLibs {

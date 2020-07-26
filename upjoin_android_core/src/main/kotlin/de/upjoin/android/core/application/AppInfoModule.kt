@@ -10,9 +10,7 @@ interface AppInfoModule {
 
     companion object {
         const val MODULE_ID = "AppInfoModule"
-
-        lateinit var instance: AppInfoModule
     }
 }
 
-val appInfoModule: AppInfoModule by lazy { AppInfoModule.instance }
+lateinit var appInfoModule: AppInfoModule
