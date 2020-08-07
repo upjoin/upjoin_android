@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
 
-        Plugins.buildscript.forEach { classpath(it) }
+        Dependencies.buildscript.forEach { classpath(it) }
 
         classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
 

@@ -69,20 +69,18 @@ dependencies {
     implementation(project(":upjoin_android_actions"))
     implementation(project(":upjoin_android_repository"))
 
-    implementation(Libs.kotlinStdLib)
+    Dependencies.kotlinDefault.forEach { implementation(it) }
+    Dependencies.androidXdefault.forEach { implementation(it) }
+    Dependencies.material.forEach { implementation(it) }
 
-    AndroidXLibs.default.forEach { implementation(it) }
+    api(Versions.AndroidX.roomRuntime)
+    kapt(Versions.AndroidX.roomCompiler)
+    implementation(Versions.AndroidX.roomRxJava2)
+    implementation(Versions.AndroidX.roomKtx)
 
-    implementation(GoogleLibs.material)
-
-    api(AndroidXLibs.roomRuntime)
-    kapt(AndroidXLibs.roomCompiler)
-    implementation(AndroidXLibs.roomRxJava2)
-    implementation(AndroidXLibs.roomKtx)
-
-    ThirdLibs.glideFramework.forEach { implementation(it) }
-    ThirdLibs.jacksonFramework.forEach { implementation(it) }
+    Dependencies.glideFramework.forEach { implementation(it) }
+    Dependencies.jacksonFramework.forEach { implementation(it) }
 
     // ***** TESTING ***** //
-    TestingLibs.androidTestsDefault.forEach { androidTestImplementation(it) }
+    Dependencies.androidTestsDefault.forEach { androidTestImplementation(it) }
 }

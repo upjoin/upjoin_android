@@ -47,10 +47,7 @@ android {
 dependencies {
     implementation(project(":upjoin_android_core"))
 
-    AndroidXLibs.default.forEach { implementation(it) }
+    Dependencies.androidXdefault.forEach { implementation(it) }
+    Dependencies.jacksonFramework.forEach { implementation(it) }
 
-    implementation(GoogleLibs.material)
-
-    ThirdLibs.glideFramework.forEach { implementation(it) }
-    ThirdLibs.jacksonFramework.forEach { implementation(it) }
 }
