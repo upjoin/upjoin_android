@@ -1,6 +1,6 @@
 object Versions {
 
-    const val kotlinVersion = "1.3.72"
+    const val kotlinVersion = "1.4.0"
 
     object BuildScript {
         // Maintenance & Build Environment
@@ -40,8 +40,10 @@ object Versions {
         //const val truthJava8Extensions: Lib = "com.google.truth.extensions:truth-java8-extension:$truthVersion"
         //const val truthAndroidExtensions: Lib = "androidx.test.ext:truth:1.1.0"
 
-        //const val mockitoCore: Lib = "org.mockito:mockito-core:2.19.0"
-        //const val mockitoKotlin: Lib = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+        const val mockitoCore = "org.mockito:mockito-core:3.1.0"
+        const val mockitoAndroid = "org.mockito:mockito-android:3.1.0"
+
+        const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
         const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
         const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.2.0"

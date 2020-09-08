@@ -5,7 +5,7 @@ import java.io.InputStream
 import java.net.URLConnection
 
 abstract class DownloadFileTask(private val streamHandler: suspend (stream: InputStream) -> Unit) :
-    AbstractAPITask<Boolean>() {
+    AbstractHTTPTask<Boolean>() {
 
     override suspend fun readResponse(urlConnection: URLConnection): Boolean? {
         if (isHttpOk) {

@@ -9,7 +9,7 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URLConnection
 
-abstract class PostTask<U, R>(private val resultClass: Class<R>): AbstractAPITask<R>() {
+abstract class PostTask<U, R>(private val resultClass: Class<R>): AbstractHTTPTask<R>() {
 
     private val objectMapper = jacksonObjectMapper()
 

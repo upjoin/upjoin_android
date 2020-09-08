@@ -5,7 +5,7 @@ import de.upjoin.android.core.logging.Logger
 import java.io.*
 import java.net.URLConnection
 
-abstract class RetrieveTask<R>(private val resultClass: Class<R>): AbstractAPITask<R>() {
+abstract class RetrieveTask<R>(private val resultClass: Class<R>): AbstractHTTPTask<R>() {
 
     private val objectMapper = jacksonObjectMapper()
 

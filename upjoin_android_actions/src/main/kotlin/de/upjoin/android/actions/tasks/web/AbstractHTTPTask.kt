@@ -11,7 +11,10 @@ import java.net.URL
 import java.net.URLConnection
 import java.util.*
 
-abstract class AbstractAPITask<R>: AbstractTask<R>(), APITask<R> {
+/**
+ * Abstract superclass for all http tasks
+ */
+abstract class AbstractHTTPTask<R>: AbstractTask<R>(), HTTPTask<R> {
 
     override var httpCode: Int? = null
 

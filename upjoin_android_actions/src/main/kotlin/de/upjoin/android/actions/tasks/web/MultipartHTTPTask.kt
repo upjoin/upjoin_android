@@ -11,7 +11,7 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URLConnection
 
-abstract class MultipartAPITask<T>(private val progressCallback: UploadProgressInfoCallback? = null): AbstractAPITask<T>() {
+abstract class MultipartHTTPTask<T>(private val progressCallback: UploadProgressInfoCallback? = null): AbstractHTTPTask<T>() {
 
     protected var request: DataOutputStream? = null
 

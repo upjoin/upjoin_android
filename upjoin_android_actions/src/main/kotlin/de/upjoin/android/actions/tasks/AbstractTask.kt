@@ -1,10 +1,13 @@
 package de.upjoin.android.actions.tasks
 
-import de.upjoin.android.core.logging.Logger
-import de.upjoin.android.actions.tasks.web.APITask
+import de.upjoin.android.actions.actionModule
 
-// TODO: Temporary extends APITask
-abstract class AbstractTask<R>: APITask<R> {
+/**
+ * Abstract task superclass. Most tasks will inherit from this superclass because only AbstractTasks
+ * subclasses can be used with AbstractAction. The main reason for this is the wish to hide the
+ * task's run method, so it cannot be called in the wrong context.
+ */
+abstract class AbstractTask<R>: Task<R> {
 
     override val collectedChangeEvents = mutableSetOf<ObjectChangeEvent>()
 
@@ -14,8 +17,10 @@ abstract class AbstractTask<R>: APITask<R> {
     var exception: Exception? = null
         protected set
 
-    override var httpCode: Int? = null
-
+    /**
+     * Runs the tasks code block. The task is considered as failed if it returns null or
+     * throws any exception.
+     */
     abstract suspend fun runSecure(): R?
 
     internal suspend fun run(): R? {
@@ -34,22 +39,27 @@ abstract class AbstractTask<R>: APITask<R> {
     }
 
     protected open fun handleException(e: Exception) {
-        Logger.error(this, e.message ?: "", e)
         exception = e
+        actionModule.handleTaskException(this, e)
     }
 
-    //@Beta
     override suspend fun onSuccess(block: OnSuccessCallback<R>): AbstractTask<R> {
         onSuccessActions.add(block)
         return this
     }
 
-    //@Beta
     override suspend fun onError(block: OnErrorCallback<R>): AbstractTask<R> {
         onErrorActions.add(block)
         return this
     }
 
+    /**
+     * Runs the given task
+     *
+     * @param task the task to run
+     * @param onError callback for when the task execution fails
+     * @param onSuccess callback for when the task execution succeeds
+     */
     protected suspend fun <V> runTask(task: AbstractTask<V>, onError: OnErrorCallback<V>? = null, onSuccess: OnSuccessCallback<V>? = null): V? {
         return task.onSuccess {
             this@AbstractTask.collectedChangeEvents.addAll(task.collectedChangeEvents)
@@ -60,6 +70,13 @@ abstract class AbstractTask<R>: APITask<R> {
         }.run()
     }
 
+    /**
+     * Runs the given tasks asynchronously
+     *
+     * @param tasks the task to run
+     * @param onAnyError callback for when at least one task execution fails
+     * @param onAllSuccess callback for when all tasks executed successfully
+     */
     protected suspend fun async(vararg tasks: AbstractTask<*>, onAnyError: (suspend (tasks: Collection<Task<*>>) -> Unit)? = null, onAllSucceed: (suspend (tasks: Collection<Task<*>>) -> Unit)? = null) {
         val taskList = tasks.toList()
         runTask(
