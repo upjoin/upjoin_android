@@ -12,7 +12,7 @@ open class FileRepository(val context: Context, protected val prefix: String? = 
     }
 
     class FileCacheEntry(val uri: Uri, val size: Long)
-    class FileCacheValue(val worker: ((OutputStream) -> Unit))
+    class FileCacheValue(val worker: OutputStreamConsumer)
 
     protected open val directory: File get() = context.filesDir
 
@@ -67,9 +67,9 @@ open class FileRepository(val context: Context, protected val prefix: String? = 
         return true
     }
 
-    fun cacheValueForWorker(worker: ((OutputStream) -> Unit)) = FileCacheValue(worker = worker)
-    fun cacheValueForInputStream(inputStream: InputStream) = FileCacheValue(worker = { fo -> inputStream.use { fi -> IOUtils.copy(fi, fo) } })
+    fun cacheValueForWorker(worker: OutputStreamConsumer) = FileCacheValue(worker = worker)
+    fun cacheValueForInputStream(inputStream: InputStream) = FileCacheValue(worker = OutputStreamConsumerUtils.forInputStream(inputStream))
     fun cacheValueForUri(uri: Uri) = FileCacheValue(
-        worker = {fo -> context.contentResolver.openInputStream(uri)?.use { fi -> IOUtils.copy(fi, fo) } ?: throw IllegalArgumentException("Cannot open input stream for uri $uri") }
+        worker = OutputStreamConsumerUtils.forUri(context.contentResolver, uri)
     )
 }

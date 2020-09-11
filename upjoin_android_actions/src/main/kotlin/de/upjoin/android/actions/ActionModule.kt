@@ -8,6 +8,12 @@ import de.upjoin.android.actions.tasks.Task
 interface ActionModule {
 
     /**
+     * Called whenever a task fails bc. of no result. Hook can be used for logging
+     * or testing.
+     */
+    fun handleTaskFailure(task: Task<*>)
+
+    /**
      * Called whenever a task fails bc. of an exception. Hook can be used for logging
      * or testing.
      */

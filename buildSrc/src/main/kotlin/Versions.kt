@@ -45,13 +45,13 @@ object Versions {
 
         const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
-        const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
-        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.2.0"
+        const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.3.0"
 
         //const val androidxTestCore: Lib = "androidx.test:core:1.2.0"
         //const val androidxTestMonitor: Lib = "androidx.test:monitor:1.2.0"
-        const val androidxTestRunner = "androidx.test:runner:1.2.0"
-        const val androidxTestRules = "androidx.test:rules:1.2.0"
+        const val androidxTestRunner = "androidx.test:runner:1.3.0"
+        const val androidxTestRules = "androidx.test:rules:1.3.0"
 
         //private const val spekVersion = "1.2.1"
         //const val spekApi: Lib = "org.jetbrains.spek:spek-api:$spekVersion"
@@ -65,13 +65,13 @@ object Versions {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha01"
-        const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha01"
+        const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha02"
+        const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha02"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-rc1"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.1"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha07"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha08"
 
         const val livecycleVersion = "2.2.0"
         const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$livecycleVersion"

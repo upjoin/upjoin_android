@@ -30,12 +30,19 @@ abstract class AbstractTask<R>: Task<R> {
                 onSuccessActions.forEach { it.invoke(result) }
                 return result
             }
+            else {
+                handleFailure()
+            }
         }
         catch (e: Exception) {
             handleException(e)
         }
         onErrorActions.forEach { it.invoke(this) }
         return null
+    }
+
+    protected open fun handleFailure() {
+        actionModule.handleTaskFailure(this)
     }
 
     protected open fun handleException(e: Exception) {
