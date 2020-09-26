@@ -1,15 +1,12 @@
 object Versions {
 
-    const val kotlinVersion = "1.4.0"
+    const val kotlinVersion = "1.4.10"
 
     object BuildScript {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         const val android = "com.android.tools.build:gradle:4.0.1"
-
-        // Google Services
-        const val googleServices = "com.google.gms:google-services:4.3.3"
 
         // Third
         const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.6.2.0"
@@ -92,11 +89,6 @@ object Versions {
 
     object Google {
         const val material = "com.google.android.material:material:1.3.0-alpha02"
-
-        const val gmsPlayAuth = "com.google.android.gms:play-services-auth:18.1.0"
-        const val gmsPlayLocation = "com.google.android.gms:play-services-location:17.0.0"
-
-        const val firebaseMessaging = "com.google.firebase:firebase-messaging:20.1.5"
     }
 
     object Glide {

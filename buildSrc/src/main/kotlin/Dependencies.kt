@@ -2,13 +2,19 @@ object Dependencies {
 
   val buildscript = listOf(
     Versions.BuildScript.kotlin,
-    Versions.BuildScript.android
-  )
+    Versions.BuildScript.android,
+    Versions.BuildScript.manodermausJUnit5)
 
   val androidTestsDefault = listOf(
     Versions.Testing.junit4,
     Versions.Testing.androidxTestRunner,
     Versions.Testing.androidxTestRules,
+    Versions.Testing.junitJupiterApi,
+    Versions.Testing.junitJupiterParams,
+    Versions.Testing.mannodermausTestCore,
+    Versions.Testing.mockitoCore,
+    Versions.Testing.mockitoAndroid,
+    Versions.Testing.mockitoKotlin,
     Versions.Testing.espressoCore,
     Versions.Testing.espressoContrib)
 
@@ -27,7 +33,11 @@ object Dependencies {
     Versions.AndroidX.livecycleExtensions,
     Versions.AndroidX.livecycleViewModelKtx,
     Versions.AndroidX.livecycleLiveData,
-    Versions.AndroidX.livecycleCommonJava8
+    Versions.AndroidX.livecycleCommonJava8)
+
+  val androidXemojis = listOf(
+    Versions.AndroidX.emoji,
+    Versions.AndroidX.emojiAppcompat
   )
 
   val material = listOf(

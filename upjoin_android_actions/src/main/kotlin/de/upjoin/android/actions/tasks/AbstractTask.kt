@@ -78,6 +78,25 @@ abstract class AbstractTask<R>: Task<R> {
     }
 
     /**
+     * Runs the given boolean task
+     *
+     * @param task the task to run
+     * @param onError callback for when the task execution fails or the result is false
+     * @param onSuccess callback for when the task execution succeeds and the result is true
+     */
+    suspend fun <Boolean> runDecision(task: AbstractTask<Boolean>, onError: OnErrorCallback<Boolean>? = null, onSuccess: OnSuccessCallback<Boolean>? = null): Boolean? {
+        task.onSuccess {
+            this@AbstractTask.collectedChangeEvents.addAll(task.collectedChangeEvents)
+            if (it == true) onSuccess?.invoke(it)
+            else onError?.invoke(task)
+        }.onError {
+            this@AbstractTask.collectedChangeEvents.addAll(task.collectedChangeEvents)
+            onError?.invoke(it)
+        }
+        return task.run()
+    }
+
+    /**
      * Runs the given tasks asynchronously
      *
      * @param tasks the task to run
