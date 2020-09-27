@@ -111,4 +111,12 @@ abstract class AbstractTask<R>: Task<R> {
             onSuccess = { onAllSucceed?.invoke(taskList) }
         )
     }
+
+    protected suspend fun <U,V> async(taskA: AbstractTask<U>, taskB: AbstractTask<V>, onAnyError: (suspend (taskA: Task<U>, taskB: Task<V>) -> Unit)? = null, onAllSucceed: (suspend (rA: U, rB: V) -> Unit)? = null) {
+        runTask(
+            AsyncTask(taskA, taskB),
+            onError = { onAnyError?.invoke(taskA, taskB) },
+            onSuccess = { tR -> onAllSucceed?.invoke(tR.resultA, tR.resultB) }
+        )
+    }
 }

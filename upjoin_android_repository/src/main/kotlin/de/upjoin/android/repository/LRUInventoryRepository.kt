@@ -44,6 +44,4 @@ internal class LRUInventoryRepository constructor(context: Context, override val
         func.invoke(lruInventory)
         set(key, lruInventory)
     }
-
-    override fun getKeyFromFileName(fileName: String) = if (key.getFileName() == fileName) key else null
 }

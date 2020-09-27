@@ -1,17 +1,23 @@
 package de.upjoin.android.repository
 
 import android.content.Context
+import android.util.LruCache
+import androidx.core.util.lruCache
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import de.upjoin.android.core.logging.Logger
 import java.io.*
 
-abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mContext: Context, val mClazz: Class<out T>, protected val mPrefix: String? = null): Repository<K, T, T>{
+abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T: Any>(val context: Context, val clazz: Class<out T>, protected val prefix: String? = null, lruSize: Int = 0): Repository<K, T, T>{
 
     interface JSONFileKey {
 
         fun getFileName(): String
 
     }
+
+    private val inMemoryCache: LruCache<K, T>? =
+        if (lruSize==0) null
+        else lruCache(lruSize, create = { key -> getUncached(key) })
 
     private val objectMapper = jacksonObjectMapper()
 
@@ -20,7 +26,7 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
     // TODO: These methods are temporary
     private fun openFileInput(fileName: String): FileInputStream? {
         if (directory==null) {
-            return mContext.openFileInput(fileName)
+            return context.openFileInput(fileName)
         }
         else {
             val file = File(directory, fileName)
@@ -31,7 +37,7 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
 
     private fun openFileOutput(fileName: String): FileOutputStream {
         if (directory==null) {
-            return mContext.openFileOutput(fileName, Context.MODE_PRIVATE)
+            return context.openFileOutput(fileName, Context.MODE_PRIVATE)
         } else {
             val file = File(directory, fileName)
             if (file.exists()) file.delete()
@@ -42,7 +48,7 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
 
     private fun deleteFile(fileName: String): Boolean {
         if (directory==null) {
-            return mContext.deleteFile(fileName)
+            return context.deleteFile(fileName)
         } else {
             val file = File(directory, fileName)
             if (file.exists()) return file.delete()
@@ -52,14 +58,14 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
 
     private fun fileList(): Array<out String> {
         val directory = directory
-        return if (directory==null) mContext.fileList() else  directory.list()
+        return if (directory==null) context.fileList() else  directory.list()
     }
 
-    @Synchronized override fun get(key: K): T? {
+    protected fun getUncached(key: K): T? {
         try {
             openFileInput(key.getFileName())?.use { fis ->
                 BufferedReader(InputStreamReader(fis)).use { reader ->
-                    return objectMapper.readValue(reader, mClazz)
+                    return objectMapper.readValue(reader, clazz)
                 }
             }
         } catch (e: FileNotFoundException) {
@@ -73,6 +79,11 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
         return null
     }
 
+    @Synchronized override fun get(key: K): T? {
+        if (inMemoryCache==null) return getUncached(key)
+        return inMemoryCache.get(key)
+    }
+
     @Synchronized override fun set(key: K, repositoryObject: T): Boolean {
         try {
             openFileOutput(key.getFileName()).use { fos ->
@@ -83,30 +94,36 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T>(val mCon
             // object could not be written to cache
             Logger.error(this, e.message ?: "", e)
             return false
+        } finally {
+            inMemoryCache?.remove(key)
         }
 
         return true
     }
 
     @Synchronized override fun remove(key: K): Boolean {
-        val fileDeleted = deleteFile(key.getFileName())
-        return fileDeleted
+        try {
+            return deleteFile(key.getFileName())
+        }
+        finally {
+            inMemoryCache?.remove(key)
+        }
     }
 
     @Synchronized override fun removeAll(): Boolean {
-        if (mPrefix != null) {
-            for (file in fileList()) {
-                if (file.startsWith(mPrefix)) {
-                    val fileDeleted = deleteFile(file)
-                    /*if (fileDeleted) {
-                        val key = getKeyFromFileName(file)
-                    }*/
+        try {
+            if (prefix != null) {
+                for (file in fileList()) {
+                    if (file.startsWith(prefix)) {
+                        deleteFile(file)
+                    }
                 }
             }
         }
+        finally {
+            inMemoryCache?.evictAll()
+        }
         return false
     }
-
-    abstract fun getKeyFromFileName(fileName: String): K?
 
 }
