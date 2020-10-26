@@ -58,7 +58,7 @@ internal class ActionQueue(private val name: String, private val timeout: Long):
             }
             job.invokeOnCompletion {
                 val runTime = Date().time - (nextAction.startTime ?: 0)
-                Logger.debug(this@ActionQueue, "$name Ending Queued Action ${nextAction::class.simpleName}")
+                Logger.debug(this@ActionQueue, "$name Ending Queued Action ${nextAction::class.simpleName}, runtime ${runTime}ms")
 
                 if (it!=null) {
                     Logger.error(this, "$name Action '${nextAction::class.simpleName}' finished with Exception: ${it.message}, runtime ${runTime}ms", it)

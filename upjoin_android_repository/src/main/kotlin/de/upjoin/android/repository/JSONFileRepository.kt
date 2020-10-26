@@ -112,11 +112,9 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T: Any>(val
 
     @Synchronized override fun removeAll(): Boolean {
         try {
-            if (prefix != null) {
-                for (file in fileList()) {
-                    if (file.startsWith(prefix)) {
-                        deleteFile(file)
-                    }
+            for (file in fileList()) {
+                if (prefix == null || file.startsWith(prefix)) {
+                    deleteFile(file)
                 }
             }
         }

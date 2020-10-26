@@ -6,7 +6,7 @@ object Versions {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val android = "com.android.tools.build:gradle:4.0.1"
+        const val android = "com.android.tools.build:gradle:4.1.0"
 
         // Third
         const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.6.2.0"
@@ -62,13 +62,13 @@ object Versions {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha02"
+        const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha04"
         const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha02"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.1"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.2"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha08"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta01"
 
         const val livecycleVersion = "2.2.0"
         const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$livecycleVersion"
@@ -88,7 +88,7 @@ object Versions {
     }
 
     object Google {
-        const val material = "com.google.android.material:material:1.3.0-alpha02"
+        const val material = "com.google.android.material:material:1.3.0-alpha03"
     }
 
     object Glide {

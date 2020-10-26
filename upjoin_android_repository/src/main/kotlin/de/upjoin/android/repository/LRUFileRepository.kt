@@ -5,6 +5,13 @@ import de.upjoin.android.repository.model.LRUInventory
 import java.io.File
 import java.io.IOException
 
+/**
+ * Repository for all kind of files.
+ * TODO: Misses an in memory cache option. Maybe include logic in FileRepository
+ *
+ * Decorator pattern? for LRU and for In Memory functions?
+ * p.e. InMemoryRepository(LRURepository(FileRepository())) ?
+ */
 open class LRUFileRepository(context: Context, prefix: String? = null,
                                                         protected val cacheDirPath: String,
                                                         private val maxEntries: Int,
@@ -21,6 +28,7 @@ open class LRUFileRepository(context: Context, prefix: String? = null,
             cachedDirectory
         }
 
+    @Synchronized
     override fun get(key: FileKey): FileCacheEntry? {
         val fileEntry = inventoryRepository.get(key.name) ?: return null
         val entry = super.get(key)
@@ -37,6 +45,7 @@ open class LRUFileRepository(context: Context, prefix: String? = null,
         }
     }
 
+    @Synchronized
     override fun set(key: FileKey, repositoryObject: FileCacheValue): Boolean {
         val success = super.set(key, repositoryObject)
         if (!success) return false
@@ -49,17 +58,18 @@ open class LRUFileRepository(context: Context, prefix: String? = null,
         return true
     }
 
+    @Synchronized
     override fun remove(key: FileKey): Boolean {
         super.remove(key)
         inventoryRepository.remove(key.name)
         return true
     }
 
+    @Synchronized
     override fun removeAll(): Boolean {
-        if (prefix == null) return false
         val fileList = directory.listFiles() ?: return false
         for (file in fileList) {
-            if (file.name.startsWith(prefix)) file.delete()
+            if (prefix==null || file.name.startsWith(prefix)) file.delete()
         }
         inventoryRepository.removeAll()
         return true
