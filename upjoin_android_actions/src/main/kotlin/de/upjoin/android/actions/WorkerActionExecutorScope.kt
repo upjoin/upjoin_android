@@ -10,7 +10,7 @@ import kotlin.reflect.full.createInstance
 object WorkerActionExecutorScope {
 
     fun <T: Action> executeAction(action: T,
-      clazz: KClass<WorkerActionExecutionPlan.WorkerActionDescription<T>>
+      clazz: KClass<out WorkerActionExecutionPlan.WorkerActionDescription<T>>
     ) {
         val workerActionDescription = clazz.createInstance()
         val className = clazz.qualifiedName ?: "WorkerActionDescription cannot be an abstract class"
@@ -39,7 +39,7 @@ object WorkerActionExecutorScope {
             val clazz = inputData.getString(WORKER_ACTION_DESCRIPTION_CLASS) ?: return Result.failure()
             val workerActionDescription = Class.forName(clazz).newInstance() as WorkerActionExecutionPlan.WorkerActionDescription<*>
 
-            val action = workerActionDescription.createAction(inputData)
+            val action = workerActionDescription.createAction(applicationContext, inputData)
             try {
                 action.run()
             }

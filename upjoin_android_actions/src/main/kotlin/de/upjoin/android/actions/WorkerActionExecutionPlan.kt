@@ -1,10 +1,11 @@
 package de.upjoin.android.actions
 
+import android.content.Context
 import androidx.work.Constraints
 import androidx.work.Data
 import kotlin.reflect.KClass
 
-class WorkerActionExecutionPlan<T: Action>(private val clazz: KClass<WorkerActionDescription<T>>): ActionExecutionPlan {
+class WorkerActionExecutionPlan<T: Action>(private val clazz: KClass<out WorkerActionDescription<T>>): ActionExecutionPlan {
 
     override fun executeAction(action: Action) {
         WorkerActionExecutorScope.executeAction(action as T, clazz)
@@ -13,7 +14,7 @@ class WorkerActionExecutionPlan<T: Action>(private val clazz: KClass<WorkerActio
     abstract class WorkerActionDescription<T: Action> {
 
         abstract fun provideInputData(action: T, inputData: Data.Builder)
-        abstract fun createAction(inputData: Data): T
+        abstract fun createAction(context: Context, inputData: Data): T
 
         fun getConstraints(): Constraints = Constraints.Builder().build()
     }
