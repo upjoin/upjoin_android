@@ -30,6 +30,7 @@ object Dependencies {
     Versions.AndroidX.swipeRefreshLayout,
     Versions.AndroidX.activityKtx,
     Versions.AndroidX.fragmentKtx,
+    Versions.AndroidX.worker,
     Versions.AndroidX.livecycleExtensions,
     Versions.AndroidX.livecycleViewModelKtx,
     Versions.AndroidX.livecycleLiveData,

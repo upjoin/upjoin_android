@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
 import java.util.*
 
-abstract class AbstractAction(protected val context: Context) : Action {
+abstract class AbstractAction(override val context: Context) : Action {
 
     override var startTime: Long? = null
     private var isCancelledFlag = false

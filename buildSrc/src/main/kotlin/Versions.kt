@@ -69,6 +69,7 @@ object Versions {
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta01"
+        const val worker = "androidx.work:work-runtime-ktx:2.4.0"
 
         const val livecycleVersion = "2.2.0"
         const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$livecycleVersion"

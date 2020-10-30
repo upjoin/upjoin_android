@@ -36,10 +36,10 @@ android {
             // Android Gradle plugin.
             isShrinkResources = true
 
-            //ndk {
+            ndk {
             //    setProperty("debugSymbolLevel", "FULL")
-            //    debugSymbolLevel = "FULL"
-            //}
+                debugSymbolLevel = "FULL"
+            }
 
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
@@ -56,13 +56,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-}
 
-/*sourceSets {
+    /*sourceSets {
     getByName("main").java.srcDir("src/main/kotlin")
     getByName("test").java.srcDir("src/test/kotlin")
     getByName("androidTest").java.srcDir("src/androidTest/kotlin")
-}*/
+    }*/
+}
 
 dependencies {
     implementation(project(":upjoin_android_core"))

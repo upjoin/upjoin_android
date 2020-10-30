@@ -1,7 +1,6 @@
 package de.upjoin.android.actions
 
 import android.content.Context
-import kotlinx.coroutines.CoroutineScope
 
 interface Action {
 
@@ -28,7 +27,9 @@ interface Action {
 
     suspend fun run()
 
-    val scope: CoroutineScope
+    val context: Context
+
+    val scope: ActionExecutionPlan
 
     val queuingMode: QueuingMode
 

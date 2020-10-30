@@ -3,18 +3,15 @@ package de.upjoin.android.actions
 import android.content.Context
 import de.upjoin.android.actions.Action.QueuingMode
 import de.upjoin.android.core.logging.Logger
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.*
 import java.util.*
 
-internal class ActionQueue(private val name: String, private val timeout: Long): LinkedList<de.upjoin.android.actions.Action>() {
+internal class ActionQueue(private val name: String, private val coroutineScope: CoroutineScope, private val timeout: Long): LinkedList<Action>() {
 
-    private var runningAction: de.upjoin.android.actions.Action? = null
+    private var runningAction: Action? = null
 
     @Synchronized
-    fun queue(action: de.upjoin.android.actions.Action) {
+    fun queue(action: Action) {
         if (action.queuingMode== QueuingMode.FirstWins && (runningAction == action || find { it == action } != null)) return
 
         if (action.queuingMode== QueuingMode.LastWins) {
@@ -53,7 +50,7 @@ internal class ActionQueue(private val name: String, private val timeout: Long):
             /*val handler = CoroutineExceptionHandler { _, exception ->
                 Logger.error(this, "$name CoroutineExceptionHandler got $exception", exception)
             }*/
-            val job = nextAction.scope.launch {
+            val job = coroutineScope.launch {
                 asyncAction(nextAction)
             }
             job.invokeOnCompletion {
@@ -79,7 +76,7 @@ internal class ActionQueue(private val name: String, private val timeout: Long):
         checkQueue()
     }
 
-    private suspend fun asyncAction(action: de.upjoin.android.actions.Action) = withContext(Dispatchers.Default) {
+    private suspend fun asyncAction(action: Action) = withContext(Dispatchers.Default) {
         Logger.debug(this@ActionQueue, "$name Starting Queued Action ${action::class.simpleName}")
         withTimeout(timeout) {
             action.run()

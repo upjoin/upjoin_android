@@ -1,6 +1,5 @@
 package de.upjoin.android.demo
 
-import de.upjoin.android.core.BuildConfig
 import de.upjoin.android.core.application.AppInfoModule
 import de.upjoin.android.core.application.ModulizedApplication
 import de.upjoin.android.core.application.appInfoModule
