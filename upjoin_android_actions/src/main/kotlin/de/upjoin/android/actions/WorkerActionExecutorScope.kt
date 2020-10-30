@@ -13,7 +13,7 @@ object WorkerActionExecutorScope {
       clazz: KClass<out WorkerActionExecutionPlan.WorkerActionDescription<T>>
     ) {
         val workerActionDescription = clazz.createInstance()
-        val className = clazz.qualifiedName ?: "WorkerActionDescription cannot be an abstract class"
+        val className = clazz.java.name ?: "WorkerActionDescription cannot be an abstract class"
         val inputDataBuilder = Data.Builder().putString(WORKER_ACTION_DESCRIPTION_CLASS, className)
         workerActionDescription.provideInputData(action, inputDataBuilder)
         val inputData = inputDataBuilder.build()
