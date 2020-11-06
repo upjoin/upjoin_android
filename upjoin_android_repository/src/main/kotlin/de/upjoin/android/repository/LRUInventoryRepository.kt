@@ -5,7 +5,7 @@ import de.upjoin.android.repository.model.LRUInventory
 import java.io.File
 
 internal class LRUInventoryRepository constructor(context: Context, override val directory: File):
-    JSONFileRepository<LRUInventoryRepository.LRUInventoryKey, LRUInventory>(context, LRUInventory::class.java) {
+    JSONFileRepository<LRUInventoryRepository.LRUInventoryKey, LRUInventory>(context, LRUInventory::class.java, lruSize = 1) {
 
     class LRUInventoryKey() : JSONFileKey {
 
