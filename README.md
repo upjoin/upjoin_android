@@ -11,7 +11,8 @@ allprojects {
 
 Add project dependencies:
 
-implementation("com.github.upjoin.upjoin_android:upjoin_android_core:0.0.1.4")
-implementation("com.github.upjoin.upjoin_android:upjoin_android_actions:0.0.1.4")
-implementation("com.github.upjoin.upjoin_android:upjoin_android_repository:0.0.1.4")
+implementation("com.github.upjoin.upjoin_android:upjoin_android_core:0.0.1.14")
+implementation("com.github.upjoin.upjoin_android:upjoin_android_actions:0.0.1.14")
+implementation("com.github.upjoin.upjoin_android:upjoin_android_repository:0.0.1.14")
+implementation("com.github.upjoin.upjoin_android:upjoin_android_view:0.0.1.14")
 ...
