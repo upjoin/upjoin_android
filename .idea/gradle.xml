@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/upjoin_android_actions" />
             <option value="$PROJECT_DIR$/upjoin_android_core" />
             <option value="$PROJECT_DIR$/upjoin_android_repository" />
+            <option value="$PROJECT_DIR$/upjoin_android_view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

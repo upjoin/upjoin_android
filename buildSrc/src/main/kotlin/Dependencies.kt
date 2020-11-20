@@ -36,6 +36,10 @@ object Dependencies {
     Versions.AndroidX.livecycleLiveData,
     Versions.AndroidX.livecycleCommonJava8)
 
+  val androidXnavigation = listOf(
+    Versions.AndroidX.navigationFragment,
+    Versions.AndroidX.navigationUI)
+
   val androidXemojis = listOf(
     Versions.AndroidX.emoji,
     Versions.AndroidX.emojiAppcompat

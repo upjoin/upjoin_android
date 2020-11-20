@@ -84,11 +84,11 @@ abstract class AbstractTask<R>: Task<R> {
      * @param onError callback for when the task execution fails or the result is false
      * @param onSuccess callback for when the task execution succeeds and the result is true
      */
-    suspend fun runDecision(task: AbstractTask<Boolean>, onError: OnErrorCallback<Boolean>? = null, onSuccess: OnSuccessCallback<Boolean>? = null): Boolean {
+    suspend fun runDecision(task: AbstractTask<Boolean>, onError: OnErrorCallback<Boolean>? = null, onSuccess: OnSuccessCallback<Unit>? = null): Boolean {
         var result = false
         task.onSuccess {
             this@AbstractTask.collectedChangeEvents.addAll(task.collectedChangeEvents)
-            if (it) onSuccess?.invoke(it)
+            if (it) onSuccess?.invoke(Unit)
             else onError?.invoke(task)
             result = it
         }.onError {

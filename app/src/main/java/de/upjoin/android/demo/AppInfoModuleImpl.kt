@@ -1,17 +1,10 @@
 package de.upjoin.android.demo
 
-import de.upjoin.android.core.application.AppInfoModule
-import de.upjoin.android.core.application.ModulizedApplication
-import de.upjoin.android.core.application.appInfoModule
-import de.upjoin.android.core.modules.ModuleLiveCycle
+import de.upjoin.android.view.modules.ApplicationInfoModuleImpl
 
-class AppInfoModuleImpl: AppInfoModule, ModuleLiveCycle {
+class AppInfoModuleImpl: ApplicationInfoModuleImpl() {
 
     override val isDebug = BuildConfig.BUILD_TYPE == "debug"
     override val appVersion = BuildConfig.VERSION_NAME
-
-    override fun onCreate(application: ModulizedApplication) {
-        appInfoModule = this
-    }
 
 }
