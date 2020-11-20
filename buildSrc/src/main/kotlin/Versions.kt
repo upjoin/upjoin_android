@@ -54,7 +54,7 @@ object Versions {
         //const val spekApi: Lib = "org.jetbrains.spek:spek-api:$spekVersion"
         //const val spekEngine: Lib = "org.jetbrains.spek:spek-junit-platform-engine:$spekVersion"
 
-        const val junit4 = "junit:junit:4.13"
+        const val junit4 = "junit:junit:4.13.1"
 
         // Third
         const val mannodermausTestCore = "de.mannodermaus.junit5:android-test-core:1.2.0"
@@ -77,7 +77,7 @@ object Versions {
         const val livecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$livecycleVersion"
         const val livecycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:$livecycleVersion"
 
-        const val navigationVersion = "2.2.0"
+        const val navigationVersion = "2.3.1"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
