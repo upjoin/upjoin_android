@@ -14,7 +14,7 @@ import de.upjoin.android.view.extensions.hideProgress
 import de.upjoin.android.view.extensions.showProgress
 import kotlinx.android.synthetic.main.overlay_frame.view.*
 
-abstract class OverlayImpl(protected val context: Context,
+abstract class OverlayImpl(val context: Context,
                            private val dialogTheme: Int = R.style.UPJOIN_FullWidthAlterDialogTheme
 ) {
 

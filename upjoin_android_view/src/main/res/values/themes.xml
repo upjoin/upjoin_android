@@ -3,6 +3,7 @@
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="overlay_background_tint">?colorPrimary</item>
+        <item name="overlay_background_tint">?colorPrimaryDark</item>
+        <item name="overlay_x_color">?colorPrimary</item>
     </style>
 </resources>
