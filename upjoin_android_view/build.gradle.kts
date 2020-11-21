@@ -50,5 +50,7 @@ dependencies {
     implementation(project(":upjoin_android_actions"))
 
     Dependencies.androidXdefault.forEach { implementation(it) }
+    Dependencies.androidXemojis.forEach { implementation(it) }
+
     Dependencies.jacksonFramework.forEach { implementation(it) }
 }
