@@ -1,0 +1,8 @@
+<resources>
+    <style name="UPJOIN.FullWidthAlterDialogTheme" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="overlay_background_tint">?colorPrimary</item>
+    </style>
+</resources>

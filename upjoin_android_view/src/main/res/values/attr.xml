@@ -1,0 +1,7 @@
+<resources>
+    <attr name="overlay_background_tint" format="reference|color" />
+    <attr name="overlay_cancel_button_style" format="reference" />
+    <attr name="overlay_continue_button_style" format="reference" />
+    <attr name="overlay_title_style" format="reference" />
+    <attr name="overlay_x_color" format="reference|color" />
+</resources>
