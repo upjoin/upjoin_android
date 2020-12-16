@@ -39,4 +39,7 @@ interface Action {
 
     var startTime: Long?
 
+    enum class SkipExecutionReason {
+        JobCancelled, CancelledManually, CannotRun
+    }
 }

@@ -19,6 +19,17 @@ interface ActionModule {
      */
     fun handleTaskException(task: Task<*>, e: Exception)
 
+    /**
+     * Called whenever an action fails bc. of an exception. Hook can be used for logging
+     * or testing.
+     */
+    fun handleActionException(action: Action, e: Exception)
+
+    /**
+     * Called whenever an action execution is skipped,
+     */
+    fun handleActionExecutionSkipped(action: Action, reason: Action.SkipExecutionReason)
+
     companion object {
         const val MODULE_ID = "ActionModule"
     }

@@ -1,6 +1,7 @@
 package de.upjoin.android.actions
 
 import android.content.Context
+import de.upjoin.android.actions.Action.SkipExecutionReason.*
 import de.upjoin.android.actions.tasks.*
 import de.upjoin.android.actions.ActionChangeEventRegistry.ActionEvent
 import de.upjoin.android.core.logging.Logger
@@ -24,19 +25,27 @@ abstract class AbstractAction(override val context: Context) : Action {
 
     override suspend fun run() {
         withContext(Dispatchers.Default) {
-            job = coroutineContext[Job]
-            startTime = Date().time
-
-            if (isCancelled() || !canRun()) {
-                job?.cancel()
-            }
-            yield()
             try {
+                job = coroutineContext[Job]
+                startTime = Date().time
+
+                if (job?.isCancelled==true) {
+                    actionModule.handleActionExecutionSkipped(this@AbstractAction, JobCancelled)
+                    job?.cancel()
+                }
+                else if (isCancelled()) {
+                    actionModule.handleActionExecutionSkipped(this@AbstractAction, CancelledManually)
+                    job?.cancel()
+                }
+                else if (!canRun()) {
+                    actionModule.handleActionExecutionSkipped(this@AbstractAction, CannotRun)
+                    job?.cancel()
+                }
+                yield()
                 runSave()
             }
             catch (e: Exception) {
-                // also catches (Timeout)CancellationException. If not wanted, rethrow this special Exception
-                Logger.error(this, e.message, e)
+                actionModule.handleActionException(this@AbstractAction, e)
             }
             finally {
                 handleChangeEvents()
@@ -57,7 +66,6 @@ abstract class AbstractAction(override val context: Context) : Action {
         catch (e: Exception) {
             Logger.error(this, "Exception handling action change event: ${e.message}", e)
         }
-
     }
 
     protected suspend fun async(vararg tasks: AbstractTask<*>, onAnyError: (suspend (tasks: Collection<Task<*>>) -> Unit)? = null, onAllSucceed: (suspend (tasks: Collection<Task<*>>) -> Unit)? = null) {

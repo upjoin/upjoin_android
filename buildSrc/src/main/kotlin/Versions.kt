@@ -1,12 +1,12 @@
 object Versions {
 
-    const val kotlinVersion = "1.4.10"
+    const val kotlinVersion = "1.4.21"
 
     object BuildScript {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val android = "com.android.tools.build:gradle:4.1.1"
+        const val android = "com.android.tools.build:gradle:4.2.0-beta02"
 
         // Third
         const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.6.2.0"
@@ -68,7 +68,7 @@ object Versions {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta01"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta02"
         const val worker = "androidx.work:work-runtime-ktx:2.4.0"
 
         const val livecycleVersion = "2.2.0"
@@ -77,7 +77,7 @@ object Versions {
         const val livecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$livecycleVersion"
         const val livecycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:$livecycleVersion"
 
-        const val navigationVersion = "2.3.1"
+        const val navigationVersion = "2.3.2"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
@@ -93,7 +93,7 @@ object Versions {
     }
 
     object Google {
-        const val material = "com.google.android.material:material:1.3.0-alpha03"
+        const val material = "com.google.android.material:material:1.3.0-alpha04"
     }
 
     object Glide {
