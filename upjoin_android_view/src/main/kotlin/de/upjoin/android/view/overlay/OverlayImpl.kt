@@ -5,63 +5,51 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.view.ContextThemeWrapper
-import com.google.android.material.button.MaterialButton
 import de.upjoin.android.view.R
+import de.upjoin.android.view.databinding.OverlayFrameBinding
 import de.upjoin.android.view.extensions.hideProgress
 import de.upjoin.android.view.extensions.showProgress
-import kotlinx.android.synthetic.main.overlay_frame.view.*
 
 abstract class OverlayImpl(val context: Context,
                            private val dialogTheme: Int = R.style.UPJOIN_FullWidthAlterDialogTheme
 ) {
 
     protected lateinit var dialog: AlertDialog
-    private val frameView: View
-
-    protected val cancelButton: MaterialButton
-    protected val continueButton: MaterialButton
-    protected val dialogTitleText: TextView
-    protected val closeXButton: ImageView
+    protected val frameBinding: OverlayFrameBinding
 
     init {
         val inflater = ContextThemeWrapper(context, dialogTheme).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        frameView = inflater.inflate(R.layout.overlay_frame, null)
-
-        closeXButton = frameView.close_x
-        cancelButton = frameView.cancel_button
-        continueButton = frameView.continue_button
-        dialogTitleText = frameView.dialogTitleText
+        val frameView = inflater.inflate(R.layout.overlay_frame, null)
+        frameBinding = OverlayFrameBinding.bind(frameView)
     }
 
     protected fun hideButtonRow() {
-        frameView.button_row.visibility = INVISIBLE
+        frameBinding.buttonRow.visibility = INVISIBLE
     }
 
     protected fun init(contentLayout: Int): View {
         val inflater = ContextThemeWrapper(context, dialogTheme).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val contentView = inflater.inflate(contentLayout, null)
-        frameView.dialog_form.addView(contentView)
+        frameBinding.dialogForm.addView(contentView)
 
         val builder = AlertDialog.Builder(context, dialogTheme)
         dialog = builder
-                .setView(frameView)
+                .setView(frameBinding.root)
                 .setCancelable(false)
                 .show()
 
-        frameView.close_x.setOnClickListener { dialog.dismiss() }
+        frameBinding.closeX.setOnClickListener { dialog.dismiss() }
 
         return contentView
     }
 
     fun showProgress() {
-        frameView.dialog_form.showProgress(frameView.progress)
+        frameBinding.dialogForm.showProgress(frameBinding.progress)
     }
 
     fun hideProgress() {
-        frameView.dialog_form.hideProgress(frameView.progress)
+        frameBinding.dialogForm.hideProgress(frameBinding.progress)
     }
 
     fun dismiss() {

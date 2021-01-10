@@ -6,7 +6,7 @@ object Versions {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val android = "com.android.tools.build:gradle:4.2.0-beta02"
+        const val android = "com.android.tools.build:gradle:4.2.0-beta03"
 
         // Third
         const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.6.2.0"
@@ -19,7 +19,7 @@ object Versions {
 
     object Testing {
         // JUnit 5
-        private const val junitJupiterVersion = "5.6.2"
+        private const val junitJupiterVersion = "5.7.0"
         //private const val junitPlatformVersion = "1.6.2"
         //private const val junitVintageVersion = "5.6.2"
         const val junitJupiterApi = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
@@ -37,8 +37,8 @@ object Versions {
         //const val truthJava8Extensions: Lib = "com.google.truth.extensions:truth-java8-extension:$truthVersion"
         //const val truthAndroidExtensions: Lib = "androidx.test.ext:truth:1.1.0"
 
-        const val mockitoCore = "org.mockito:mockito-core:3.1.0"
-        const val mockitoAndroid = "org.mockito:mockito-android:3.1.0"
+        const val mockitoCore = "org.mockito:mockito-core:3.6.28"
+        const val mockitoAndroid = "org.mockito:mockito-android:3.2.0"
 
         const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
@@ -68,7 +68,7 @@ object Versions {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta02"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-rc01"
         const val worker = "androidx.work:work-runtime-ktx:2.4.0"
 
         const val livecycleVersion = "2.2.0"
@@ -81,7 +81,7 @@ object Versions {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-        const val roomVersion = "2.2.5"
+        const val roomVersion = "2.2.6"
         const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
         const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
         const val roomRxJava2 = "androidx.room:room-rxjava2:$roomVersion"
@@ -93,7 +93,7 @@ object Versions {
     }
 
     object Google {
-        const val material = "com.google.android.material:material:1.3.0-alpha04"
+        const val material = "com.google.android.material:material:1.3.0-beta01"
     }
 
     object Glide {
@@ -102,7 +102,7 @@ object Versions {
     }
 
     object Jackson {
-        private const val jacksonVersion = "2.10.3"
+        private const val jacksonVersion = "2.11.3"
 
         const val jacksonAnnotiations = "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
         const val jacksonDatabind = "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"

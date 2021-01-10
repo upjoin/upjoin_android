@@ -1,7 +1,9 @@
 package de.upjoin.android.actions.tasks.web
 
+import de.upjoin.android.core.application.ModulizedApplication
 import de.upjoin.android.core.application.appInfoModule
 import de.upjoin.android.core.logging.Logger
+import de.upjoin.android.core.modules.ModuleLiveCycle
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import java.security.cert.X509Certificate
@@ -11,12 +13,16 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-interface WebServiceInfoModule {
+abstract class WebServiceInfoModule: ModuleLiveCycle {
 
-    fun getWebServiceBaseUrl() = if (appInfoModule.isDebug) getDebugWebServiceBaseUrl() else getProdWebServiceBaseUrl()
+    override fun onCreate(application: ModulizedApplication) {
+        webServiceInfoModule = this
+    }
 
-    fun getDebugWebServiceBaseUrl(): String
-    fun getProdWebServiceBaseUrl(): String
+    open fun getWebServiceBaseUrl() = if (appInfoModule.isDebug) getDebugWebServiceBaseUrl() else getProdWebServiceBaseUrl()
+
+    abstract fun getDebugWebServiceBaseUrl(): String
+    abstract fun getProdWebServiceBaseUrl(): String
 
     fun initConnectionForDebug() {
         if (!appInfoModule.isDebug) return

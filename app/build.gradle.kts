@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     //id("jacoco")
 }
@@ -56,7 +55,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
+    buildFeatures {
+        viewBinding = true
+    }
     /*sourceSets {
     getByName("main").java.srcDir("src/main/kotlin")
     getByName("test").java.srcDir("src/test/kotlin")
