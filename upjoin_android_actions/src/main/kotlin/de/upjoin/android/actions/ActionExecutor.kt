@@ -6,6 +6,7 @@ import android.os.Handler
 object ActionExecutor {
 
     fun executeActionDelayed(action: Action, delayMillis: Long) {
+        // TODO replace deprecated
         Handler().postDelayed({ executeAction(action) }, delayMillis)
     }
 
