@@ -25,6 +25,7 @@ abstract class AbstractAction(override val context: Context) : Action {
 
     override suspend fun run() {
         withContext(Dispatchers.Default) {
+            actionModule.handleActionExecuted(this@AbstractAction)
             try {
                 job = coroutineContext[Job]
                 startTime = Date().time

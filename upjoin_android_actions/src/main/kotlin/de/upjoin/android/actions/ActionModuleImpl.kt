@@ -13,6 +13,14 @@ class ActionModuleImpl: ActionModule, ModuleLiveCycle {
         actionModule = this
     }
 
+    override fun handleTaskExecuted(task: Task<*>) {
+        Logger.info(this, "Task $task executed.")
+    }
+
+    override fun handleActionExecuted(action: Action) {
+        Logger.info(this, "Action $action executed.")
+    }
+
     override fun handleTaskFailure(task: Task<*>) {
         if (task is HTTPTask) {
             Logger.error(this, "Task $task failed with httpcode ${task.httpCode}.")
@@ -37,8 +45,6 @@ class ActionModuleImpl: ActionModule, ModuleLiveCycle {
             CancelledManually -> Logger.info(this, "Skipped Action $action bc job was canceled manually.")
             CannotRun -> Logger.info(this, "Skipped Action $action bc it was not allowed to run.")
         }
-
-
     }
 
 }

@@ -25,6 +25,7 @@ abstract class AbstractTask<R>: Task<R> {
 
     internal suspend fun run(): R? {
         try {
+            actionModule.handleTaskExecuted(this)
             val result = runSecure()
             if (result!=null) {
                 onSuccessActions.forEach { it.invoke(result) }
