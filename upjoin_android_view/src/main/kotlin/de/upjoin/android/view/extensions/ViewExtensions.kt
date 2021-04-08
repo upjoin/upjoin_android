@@ -8,17 +8,17 @@ import android.widget.ProgressBar
 /**
  * Shows the progress UI and hides the form.
  */
-private fun showProgress(form: View, progress: ProgressBar, show: Boolean) {
+private fun showProgress(form: View, progress: ProgressBar, show: Boolean, hiddenVisibility: Int = View.GONE) {
     val shortAnimTime = form.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
     form.apply {
-        visibility = if (show) View.GONE else View.VISIBLE
+        visibility = if (show) hiddenVisibility else View.VISIBLE
         animate()
             .setDuration(shortAnimTime)
             .alpha((if (show) 0 else 1).toFloat())
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    visibility = if (show) View.GONE else View.VISIBLE
+                    visibility = if (show) hiddenVisibility else View.VISIBLE
                 }
             })
     }

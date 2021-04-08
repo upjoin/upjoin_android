@@ -1,8 +1,7 @@
 package de.upjoin.android.actions.tasks.web
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import de.upjoin.android.core.application.appInfoModule
-import de.upjoin.android.core.logging.Logger
+import com.fasterxml.jackson.databind.ObjectMapper
+import de.upjoin.android.actions.actionModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.*
@@ -11,10 +10,12 @@ import java.net.URLConnection
 
 abstract class PostTask<U, R>(private val resultClass: Class<R>): AbstractHTTPTask<R>() {
 
-    private val objectMapper = jacksonObjectMapper()
+    private val objectMapper: ObjectMapper by lazy { taskType.createObjectMapper() }
+
+    protected abstract fun fetchRequest(): U?
 
     @Throws(IOException::class)
-    protected fun readObject(stream: InputStream): R {
+    override fun transformResponseBody(stream: InputStream): R {
         if (resultClass == String::class.java) {
             return inputStreamToString(stream) as R
         }
@@ -23,7 +24,10 @@ abstract class PostTask<U, R>(private val resultClass: Class<R>): AbstractHTTPTa
         }
     }
 
-    protected abstract fun fetchRequest(): U?
+    @Throws(IOException::class)
+    override fun transformResponseBody(string: String): R {
+        return objectMapper.readValue(string, resultClass)
+    }
 
     override suspend fun prepareRequest(urlConnection: URLConnection) {
         val request = fetchRequest()
@@ -40,42 +44,19 @@ abstract class PostTask<U, R>(private val resultClass: Class<R>): AbstractHTTPTa
         DataOutputStream(urlConnection.outputStream).use { wr ->
             // some POST requests don't even need a request body
             if (request != null) {
-                if (appInfoModule.isDebug) {
-                    Logger.debug(this, objectMapper.writeValueAsString(request))
+                if (taskType.debugTask(this)) {
+                    val requestString = objectMapper.writeValueAsString(request)
+                    actionModule.debugRequest(this, requestString)
                 }
                 objectMapper.writeValue(wr as OutputStream, request)
             }
         }
     }
 
-    override suspend fun readResponse(urlConnection: URLConnection): R? {
-        if (isHttpOk) {
-            BufferedInputStream(urlConnection.inputStream).use {
-                    stream -> return readObject(stream)
-            }
-        }
-
-        Logger.error(this, "Post Request on URL ${getURL()} returned error code ${httpCode}")
-        return null
-    }
-
     override suspend fun openURLConnection() = withContext(Dispatchers.IO) {
         val urlConnection = super.openURLConnection()
         urlConnection.requestMethod = "POST"
         return@withContext urlConnection
-    }
-
-    @Throws(IOException::class)
-    private fun inputStreamToString(inputStream: InputStream): String {
-        val result = ByteArrayOutputStream()
-        val buffer = ByteArray(1024)
-        var length: Int = inputStream.read(buffer)
-        while (length > 0) {
-            result.write(buffer, 0, length)
-            length = inputStream.read(buffer)
-        }
-        // StandardCharsets.UTF_8.name() > JDK 7
-        return result.toString("UTF-8")
     }
 
 }

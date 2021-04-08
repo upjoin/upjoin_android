@@ -1,16 +1,16 @@
 package de.upjoin.android.actions.tasks.web
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import de.upjoin.android.core.logging.Logger
-import java.io.*
-import java.net.URLConnection
+import com.fasterxml.jackson.databind.ObjectMapper
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 abstract class RetrieveTask<R>(private val resultClass: Class<R>): AbstractHTTPTask<R>() {
 
-    private val objectMapper = jacksonObjectMapper()
+    private val objectMapper: ObjectMapper by lazy { taskType.createObjectMapper() }
 
     @Throws(IOException::class)
-    protected fun readObject(stream: InputStream): R {
+    override fun transformResponseBody(stream: InputStream): R {
         if (resultClass == String::class.java) {
             return inputStreamToString(stream) as R
         }
@@ -19,26 +19,9 @@ abstract class RetrieveTask<R>(private val resultClass: Class<R>): AbstractHTTPT
         }
     }
 
-    override suspend fun readResponse(urlConnection: URLConnection): R? {
-        if (isHttpOk) {
-            BufferedInputStream(urlConnection.inputStream).use { stream -> return readObject(stream) }
-        }
-
-        Logger.error(this, "GET Request on URL ${getURL()} returned error code $httpCode")
-        return null
-    }
-
     @Throws(IOException::class)
-    private fun inputStreamToString(inputStream: InputStream): String {
-        val result = ByteArrayOutputStream()
-        val buffer = ByteArray(1024)
-        var length: Int = inputStream.read(buffer)
-        while (length > 0) {
-            result.write(buffer, 0, length)
-            length = inputStream.read(buffer)
-        }
-        // StandardCharsets.UTF_8.name() > JDK 7
-        return result.toString("UTF-8")
+    override fun transformResponseBody(string: String): R {
+        return objectMapper.readValue(string, resultClass)
     }
 
 }

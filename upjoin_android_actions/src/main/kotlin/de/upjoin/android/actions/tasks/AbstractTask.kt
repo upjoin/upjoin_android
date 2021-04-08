@@ -9,6 +9,8 @@ import de.upjoin.android.actions.actionModule
  */
 abstract class AbstractTask<R>: Task<R> {
 
+    protected open val taskType = actionModule.getDefaultTaskType()
+
     override val collectedChangeEvents = mutableSetOf<ObjectChangeEvent>()
 
     private val onSuccessActions = mutableListOf<OnSuccessCallback<R>>()

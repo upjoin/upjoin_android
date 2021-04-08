@@ -1,15 +1,15 @@
 object Versions {
 
-    const val kotlinVersion = "1.4.30"
+    const val kotlinVersion = "1.4.32"
 
     object BuildScript {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val android = "com.android.tools.build:gradle:4.2.0-beta04"
+        const val android = "com.android.tools.build:gradle:4.2.0-beta06"
 
         // Third
-        const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.6.2.0"
+        const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
     }
 
     object Kotlin {
@@ -19,7 +19,7 @@ object Versions {
 
     object Testing {
         // JUnit 5
-        private const val junitJupiterVersion = "5.7.0"
+        private const val junitJupiterVersion = "5.7.1"
         //private const val junitPlatformVersion = "1.6.2"
         //private const val junitVintageVersion = "5.6.2"
         const val junitJupiterApi = "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
@@ -54,7 +54,7 @@ object Versions {
         //const val spekApi: Lib = "org.jetbrains.spek:spek-api:$spekVersion"
         //const val spekEngine: Lib = "org.jetbrains.spek:spek-junit-platform-engine:$spekVersion"
 
-        const val junit4 = "junit:junit:4.13.1"
+        const val junit4 = "junit:junit:4.13.2"
 
         // Third
         const val mannodermausTestCore = "de.mannodermaus.junit5:android-test-core:1.2.0"
@@ -62,40 +62,42 @@ object Versions {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
-        const val appcompat = "androidx.appcompat:appcompat:1.3.0-beta01"
+        const val coreKtx = "androidx.core:core-ktx:1.6.0-alpha01"
+        const val appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-        const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-rc02"
-        const val worker = "androidx.work:work-runtime-ktx:2.5.0"
+        const val activityKtx = "androidx.activity:activity-ktx:1.2.2"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.2"
+        const val worker = "androidx.work:work-runtime-ktx:2.6.0-alpha01"
 
-        const val livecycleVersion = "2.2.0"
-        const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$livecycleVersion"
+        const val livecycleVersion = "2.3.1"
+        const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
         const val livecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$livecycleVersion"
         const val livecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$livecycleVersion"
         const val livecycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:$livecycleVersion"
 
-        const val navigationVersion = "2.3.3"
+        const val navigationVersion = "2.3.5"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+        const val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 
         const val roomVersion = "2.2.6"
         const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
         const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
         const val roomRxJava2 = "androidx.room:room-rxjava2:$roomVersion"
         const val roomKtx = "androidx.room:room-ktx:$roomVersion"
+        // "androidx.room:room-testing:$roomVersion"
 
         const val emojiVersion = "1.1.0"
         const val emoji = "androidx.emoji:emoji:$emojiVersion"
         const val emojiAppcompat = "androidx.emoji:emoji-appcompat:$emojiVersion"
 
-        const val cameraVersion = "1.1.0-alpha01"
+        const val cameraVersion = "1.1.0-alpha03"
         const val cameraCore = "androidx.camera:camera-core:$cameraVersion"
         const val camera2 = "androidx.camera:camera-camera2:$cameraVersion"
         const val cameraLifecycle = "androidx.camera:camera-lifecycle:$cameraVersion"
-        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha21"
+        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha23"
         const val cameraView = "androidx.camera:camera-view:1.0.0-alpha21"
     }
 
@@ -104,8 +106,8 @@ object Versions {
     }
 
     object Glide {
-        const val glide = "com.github.bumptech.glide:glide:4.11.0" // glide imaging
-        const val glideTransform = "jp.wasabeef:glide-transformations:4.0.0" // for rounded corner images with Glide
+        const val glide = "com.github.bumptech.glide:glide:4.12.0" // glide imaging
+        const val glideTransform = "jp.wasabeef:glide-transformations:4.3.0" // for rounded corner images with Glide
     }
 
     object Jackson {

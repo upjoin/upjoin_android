@@ -1,26 +1,16 @@
 package de.upjoin.android.actions.tasks.web
 
-import com.fasterxml.jackson.core.JsonFactory
-import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import de.upjoin.android.core.logging.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.*
-import java.net.HttpURLConnection
 import java.net.URLConnection
 
-abstract class MultipartHTTPTask<T>(private val progressCallback: UploadProgressInfoCallback? = null): AbstractHTTPTask<T>() {
+abstract class MultipartHTTPTask<T>(private val resultClass: Class<T>, private val progressCallback: UploadProgressInfoCallback? = null): AbstractHTTPTask<T>() {
+
+    private val objectMapper: ObjectMapper by lazy { taskType.createObjectMapper() }
 
     protected var request: DataOutputStream? = null
-
-    private val objectMapper: ObjectMapper
-    init {
-        val messagePackFactory = JsonFactory()
-        messagePackFactory.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET)
-        objectMapper = ObjectMapper(messagePackFactory).registerKotlinModule()
-    }
 
     @Throws(IOException::class)
     override suspend fun openURLConnection() = withContext(Dispatchers.IO) {
@@ -32,10 +22,22 @@ abstract class MultipartHTTPTask<T>(private val progressCallback: UploadProgress
     }
 
     @Throws(IOException::class)
-    protected abstract suspend fun prepareRequestBody()
+    override fun transformResponseBody(stream: InputStream): T {
+        if (resultClass == String::class.java) {
+            return inputStreamToString(stream) as T
+        }
+        InputStreamReader(stream).use { r ->
+            return objectMapper.readValue(r, resultClass)
+        }
+    }
 
     @Throws(IOException::class)
-    protected abstract fun transformResponseBody(r: Reader): T
+    override fun transformResponseBody(string: String): T {
+        return objectMapper.readValue(string, resultClass)
+    }
+
+    @Throws(IOException::class)
+    protected abstract suspend fun prepareRequestBody()
 
     override suspend fun prepareRequest(urlConnection: URLConnection) {
         DataOutputStream(urlConnection.outputStream).use { request_ ->
@@ -49,35 +51,6 @@ abstract class MultipartHTTPTask<T>(private val progressCallback: UploadProgress
         }
     }
 
-    override suspend fun readResponse(urlConnection: URLConnection): T? {
-        if (isHttpOk)
-        {
-            InputStreamReader(BufferedInputStream(urlConnection.inputStream)).use { r->
-                return transformResponseBody(r)
-            }
-        }
-        else
-        {
-            val sb = StringBuilder()
-            try
-            {
-                BufferedReader(InputStreamReader(BufferedInputStream((urlConnection as HttpURLConnection).errorStream))).use { r->
-                    var s:String? = r.readLine()
-                    while (s != null) {
-                        sb.append(s).append("\n")
-                        s = r.readLine()
-                    }
-                }
-            }
-            catch (f:IOException) {
-                // do nothing when failing to read error stream
-            }
-
-            Logger.error(this, "Multipart Request on URL ${getURL()} returned error code ${httpCode}\n$sb")
-        }
-        return null
-    }
-    
     protected open fun sendProgressUpdate() {
         val r = request ?: return
         progressCallback?.progress(r.size().toLong())
