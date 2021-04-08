@@ -15,4 +15,7 @@ abstract class DownloadFileTask(private val streamHandler: suspend (stream: Inpu
         return null
     }
 
+    final override fun transformResponseBody(stream: InputStream) = true
+    final override fun transformResponseBody(string: String) = true
+
 }
