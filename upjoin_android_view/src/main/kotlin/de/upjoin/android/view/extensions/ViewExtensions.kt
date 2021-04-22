@@ -36,10 +36,10 @@ private fun showProgress(form: View, progress: ProgressBar, show: Boolean, hidde
     }
 }
 
-fun View.showProgress(progress: ProgressBar) {
-    showProgress(this, progress, true)
+fun View.showProgress(progress: ProgressBar, hiddenVisibility: Int = View.GONE) {
+    showProgress(this, progress, true, hiddenVisibility)
 }
 
-fun View.hideProgress(progress: ProgressBar) {
-    showProgress(this, progress, false)
+fun View.hideProgress(progress: ProgressBar, hiddenVisibility: Int = View.GONE) {
+    showProgress(this, progress, false, hiddenVisibility)
 }

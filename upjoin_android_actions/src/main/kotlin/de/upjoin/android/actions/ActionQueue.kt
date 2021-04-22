@@ -6,7 +6,7 @@ import de.upjoin.android.core.logging.Logger
 import kotlinx.coroutines.*
 import java.util.*
 
-internal class ActionQueue(private val name: String, private val coroutineScope: CoroutineScope, private val timeout: Long): LinkedList<Action>() {
+internal class ActionQueue(private val name: String, private val coroutineScope: CoroutineScope): LinkedList<Action>() {
 
     private var runningAction: Action? = null
 
@@ -78,8 +78,11 @@ internal class ActionQueue(private val name: String, private val coroutineScope:
 
     private suspend fun asyncAction(action: Action) = withContext(Dispatchers.Default) {
         Logger.debug(this@ActionQueue, "$name Starting Queued Action ${action::class.simpleName}")
-        withTimeout(timeout) {
+        try {
             action.run()
+        }
+        catch (e: Exception) {
+            action.onException(e)
         }
     }
 

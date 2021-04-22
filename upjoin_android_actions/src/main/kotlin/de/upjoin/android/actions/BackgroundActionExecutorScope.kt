@@ -7,8 +7,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 object BackgroundActionExecutorScope: ActionExecutorScope {
 
-    private const val timeout = 90000L
-
     private val coroutineScope = object: CoroutineScope {
         /**
          * Returns [EmptyCoroutineContext].
@@ -17,7 +15,7 @@ object BackgroundActionExecutorScope: ActionExecutorScope {
             get() = EmptyCoroutineContext
     }
 
-    private var backgroundActionWaitingQueue = ActionQueue("BackgroundQueue", coroutineScope, timeout)
+    private var backgroundActionWaitingQueue = ActionQueue("BackgroundQueue", coroutineScope)
 
     override fun executeAction(action: Action) {
         backgroundActionWaitingQueue.queue(action)

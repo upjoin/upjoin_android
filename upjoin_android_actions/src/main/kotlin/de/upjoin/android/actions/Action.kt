@@ -27,6 +27,8 @@ interface Action {
 
     suspend fun run()
 
+    suspend fun onException(e: Exception)
+
     val context: Context
 
     val scope: ActionExecutionPlan

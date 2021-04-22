@@ -7,6 +7,8 @@ import kotlin.reflect.KClass
 
 class WorkerActionExecutionPlan<T: Action>(private val clazz: KClass<out WorkerActionDescription<T>>): ActionExecutionPlan {
 
+    override val defaultTimeout = 600000L // ten minutes
+
     override fun executeAction(action: Action) {
         WorkerActionExecutorScope.executeAction(action as T, clazz)
     }

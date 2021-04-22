@@ -7,8 +7,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 object ForegroundActionExecutorScope: ActionExecutorScope {
 
-    private const val timeout = 30000L
-
     private val coroutineScope = object: CoroutineScope {
         /**
          * Returns [EmptyCoroutineContext].
@@ -17,7 +15,7 @@ object ForegroundActionExecutorScope: ActionExecutorScope {
             get() = EmptyCoroutineContext
     }
 
-    private var viewActionWaitingQueue = ActionQueue("ViewQueue", coroutineScope, timeout)
+    private var viewActionWaitingQueue = ActionQueue("ViewQueue", coroutineScope)
 
     override fun executeAction(action: Action) {
         viewActionWaitingQueue.queue(action)

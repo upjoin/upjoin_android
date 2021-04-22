@@ -9,8 +9,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 object UnqueuedActionExecutorScope: ActionExecutorScope {
 
-    private val timeout = 60000L
-
     private val coroutineScope = object: CoroutineScope {
         /**
          * Returns [EmptyCoroutineContext].
@@ -32,9 +30,7 @@ object UnqueuedActionExecutorScope: ActionExecutorScope {
             val job = coroutineScope.launch {
                 withContext(Dispatchers.Default) {
                     Logger.debug(this, "Starting Unqueued Action ${action::class.simpleName}")
-                    withTimeout(timeout) {
-                        action.run()
-                    }
+                    action.run()
                 }
             }
             job.invokeOnCompletion {

@@ -56,9 +56,11 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T: Any>(val
         }
     }
 
-    private fun fileList(): Array<out String> {
+    private fun relevantFileList(): List<String> {
         val directory = directory
-        return if (directory==null) context.fileList() else  directory.list()
+        val files = if (directory == null) context.fileList() else directory.list()
+        if (prefix == null) return files.toList()
+        return files.filter { it.startsWith(prefix) }
     }
 
     protected fun getUncached(key: K): T? {
@@ -112,10 +114,8 @@ abstract class JSONFileRepository<K: JSONFileRepository.JSONFileKey, T: Any>(val
 
     @Synchronized override fun removeAll(): Boolean {
         try {
-            for (file in fileList()) {
-                if (prefix == null || file.startsWith(prefix)) {
-                    deleteFile(file)
-                }
+            for (file in relevantFileList()) {
+                deleteFile(file)
             }
         }
         finally {
