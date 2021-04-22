@@ -14,7 +14,7 @@ abstract class AbstractAction(override val context: Context) : Action {
     private var isCancelledFlag = false
     protected var job: Job? = null
 
-    protected open var timeout: Long? = null
+    protected open val timeout: Long? = null
 
     protected val timeoutWithFallback: Long get() = timeout ?: scope.defaultTimeout
 
