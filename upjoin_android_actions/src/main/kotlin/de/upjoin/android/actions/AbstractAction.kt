@@ -34,15 +34,16 @@ abstract class AbstractAction(override val context: Context) : Action {
 
                     if (job?.isCancelled==true) {
                         actionModule.handleActionExecutionSkipped(this@AbstractAction, JobCancelled)
-                        job?.cancel()
+                        // use return bc job?.cancel would throw an exception
+                        return@withTimeout
                     }
                     else if (isCancelled()) {
                         actionModule.handleActionExecutionSkipped(this@AbstractAction, CancelledManually)
-                        job?.cancel()
+                        return@withTimeout
                     }
                     else if (!canRun()) {
                         actionModule.handleActionExecutionSkipped(this@AbstractAction, CannotRun)
-                        job?.cancel()
+                        return@withTimeout
                     }
                     yield()
                     runSave()
