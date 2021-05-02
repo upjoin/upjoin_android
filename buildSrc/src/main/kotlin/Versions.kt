@@ -62,14 +62,14 @@ object Versions {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.6.0-alpha01"
+        const val coreKtx = "androidx.core:core-ktx:1.6.0-alpha02"
         const val appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.2.2"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.2"
-        const val worker = "androidx.work:work-runtime-ktx:2.6.0-alpha01"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.3"
+        const val worker = "androidx.work:work-runtime-ktx:2.6.0-alpha02"
 
         const val livecycleVersion = "2.3.1"
         const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -82,7 +82,7 @@ object Versions {
         const val navigationUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
         const val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 
-        const val roomVersion = "2.2.6"
+        const val roomVersion = "2.3.0"
         const val roomRuntime = "androidx.room:room-runtime:$roomVersion"
         const val roomCompiler = "androidx.room:room-compiler:$roomVersion"
         const val roomRxJava2 = "androidx.room:room-rxjava2:$roomVersion"
@@ -93,11 +93,11 @@ object Versions {
         const val emoji = "androidx.emoji:emoji:$emojiVersion"
         const val emojiAppcompat = "androidx.emoji:emoji-appcompat:$emojiVersion"
 
-        const val cameraVersion = "1.1.0-alpha03"
+        const val cameraVersion = "1.1.0-alpha04"
         const val cameraCore = "androidx.camera:camera-core:$cameraVersion"
         const val camera2 = "androidx.camera:camera-camera2:$cameraVersion"
         const val cameraLifecycle = "androidx.camera:camera-lifecycle:$cameraVersion"
-        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha23"
+        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha24"
         const val cameraView = "androidx.camera:camera-view:1.0.0-alpha21"
     }
 
