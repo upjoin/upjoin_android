@@ -45,7 +45,7 @@ object Versions {
         const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
         const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.3.0"
 
-        //const val androidxTestCore: Lib = "androidx.test:core:1.2.0"
+        const val androidxTestCore = "androidx.test:core:1.4.0-beta01"
         //const val androidxTestMonitor: Lib = "androidx.test:monitor:1.2.0"
         const val androidxTestRunner = "androidx.test:runner:1.3.0"
         const val androidxTestRules = "androidx.test:rules:1.3.0"
@@ -57,19 +57,19 @@ object Versions {
         const val junit4 = "junit:junit:4.13.2"
 
         // Third
-        const val mannodermausTestCore = "de.mannodermaus.junit5:android-test-core:1.2.0"
+        const val mannodermausTestCore = "de.mannodermaus.junit5:android-test-core:1.2.2"
         const val mannodermausTestRunner = "de.mannodermaus.junit5:android-test-runner:1.2.0"
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.6.0-beta01"
-        const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha01"
+        const val coreKtx = "androidx.core:core-ktx:1.6.0-rc01"
+        const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha02"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.2.3"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.4"
-        const val worker = "androidx.work:work-runtime-ktx:2.6.0-alpha02"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.5"
+        const val worker = "androidx.work:work-runtime-ktx:2.6.0-beta01"
 
         const val livecycleVersion = "2.3.1"
         const val livecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -93,11 +93,11 @@ object Versions {
         const val emoji = "androidx.emoji:emoji:$emojiVersion"
         const val emojiAppcompat = "androidx.emoji:emoji-appcompat:$emojiVersion"
 
-        const val cameraVersion = "1.1.0-alpha04"
+        const val cameraVersion = "1.1.0-alpha05"
         const val cameraCore = "androidx.camera:camera-core:$cameraVersion"
         const val camera2 = "androidx.camera:camera-camera2:$cameraVersion"
         const val cameraLifecycle = "androidx.camera:camera-lifecycle:$cameraVersion"
-        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha24"
+        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha25"
         const val cameraView = "androidx.camera:camera-view:1.0.0-alpha21"
     }
 

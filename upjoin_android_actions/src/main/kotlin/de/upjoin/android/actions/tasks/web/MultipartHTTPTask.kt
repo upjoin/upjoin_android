@@ -104,6 +104,7 @@ abstract class MultipartHTTPTask<T>(private val resultClass: Class<T>, private v
      * @throws IOException
      */
     @Throws(IOException::class)
+    @Deprecated("writes the whole stream at once (high memory).")
     protected fun addFilePart(fieldName:String, fileName:String, uploadFile:ByteArrayOutputStream) {
         request!!.apply {
             writeBytes(twoHyphens + boundary + crlf)

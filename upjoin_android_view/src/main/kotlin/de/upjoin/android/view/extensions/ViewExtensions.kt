@@ -13,9 +13,10 @@ private fun showProgress(form: View, progress: ProgressBar, show: Boolean, hidde
 
     form.apply {
         visibility = if (show) hiddenVisibility else View.VISIBLE
+        alpha = if (show) 1f else 0f
         animate()
             .setDuration(shortAnimTime)
-            .alpha((if (show) 0 else 1).toFloat())
+            .alpha(if (show) 0f else 1f)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     visibility = if (show) hiddenVisibility else View.VISIBLE
@@ -25,9 +26,10 @@ private fun showProgress(form: View, progress: ProgressBar, show: Boolean, hidde
 
     progress.apply {
         visibility = if (show) View.VISIBLE else View.GONE
+        alpha = if (show) 0f else 1f
         animate()
             .setDuration(shortAnimTime)
-            .alpha((if (show) 1 else 0).toFloat())
+            .alpha(if (show) 1f else 0f)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     visibility = if (show) View.VISIBLE else View.GONE
