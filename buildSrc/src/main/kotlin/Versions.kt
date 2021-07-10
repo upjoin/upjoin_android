@@ -1,12 +1,12 @@
 object Versions {
 
-    const val kotlinVersion = "1.5.10"
+    const val kotlinVersion = "1.5.20"
 
     object BuildScript {
         // Maintenance & Build Environment
         //const val versions: Lib = "com.github.ben-manes:gradle-versions-plugin:0.20.0"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val android = "com.android.tools.build:gradle:4.2.1"
+        const val android = "com.android.tools.build:gradle:4.2.2"
 
         // Third
         const val manodermausJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
@@ -42,13 +42,13 @@ object Versions {
 
         const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
-        const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
-        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.3.0"
+        const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
+        const val espressoContrib = "androidx.test.espresso:espresso-contrib:3.4.0"
 
         const val androidxTestCore = "androidx.test:core:1.4.0-beta01"
         //const val androidxTestMonitor: Lib = "androidx.test:monitor:1.2.0"
-        const val androidxTestRunner = "androidx.test:runner:1.3.0"
-        const val androidxTestRules = "androidx.test:rules:1.3.0"
+        const val androidxTestRunner = "androidx.test:runner:1.4.0"
+        const val androidxTestRules = "androidx.test:rules:1.4.0"
 
         //private const val spekVersion = "1.2.1"
         //const val spekApi: Lib = "org.jetbrains.spek:spek-api:$spekVersion"
@@ -58,12 +58,12 @@ object Versions {
 
         // Third
         const val mannodermausTestCore = "de.mannodermaus.junit5:android-test-core:1.2.2"
-        const val mannodermausTestRunner = "de.mannodermaus.junit5:android-test-runner:1.2.0"
+        const val mannodermausTestRunner = "de.mannodermaus.junit5:android-test-runner:1.2.2"
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.6.0-rc01"
-        const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha02"
+        const val coreKtx = "androidx.core:core-ktx:1.7.0-alpha01"
+        const val appcompat = "androidx.appcompat:appcompat:1.4.0-alpha03"
         const val preferenceKtx = "androidx.preference:preference-ktx:1.1.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
@@ -93,16 +93,16 @@ object Versions {
         const val emoji = "androidx.emoji:emoji:$emojiVersion"
         const val emojiAppcompat = "androidx.emoji:emoji-appcompat:$emojiVersion"
 
-        const val cameraVersion = "1.1.0-alpha05"
+        const val cameraVersion = "1.1.0-alpha06"
         const val cameraCore = "androidx.camera:camera-core:$cameraVersion"
         const val camera2 = "androidx.camera:camera-camera2:$cameraVersion"
         const val cameraLifecycle = "androidx.camera:camera-lifecycle:$cameraVersion"
-        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha25"
+        const val cameraExtensions = "androidx.camera:camera-extensions:1.0.0-alpha26"
         const val cameraView = "androidx.camera:camera-view:1.0.0-alpha21"
     }
 
     object Google {
-        const val material = "com.google.android.material:material:1.3.0"
+        const val material = "com.google.android.material:material:1.4.0"
     }
 
     object Glide {

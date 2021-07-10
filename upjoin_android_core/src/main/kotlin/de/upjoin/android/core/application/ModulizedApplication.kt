@@ -20,14 +20,17 @@ open class ModulizedApplication: android.app.Application() {
         // instantiate each module and call onCreate lifecycle hook
         moduleLiveCycles.entries.forEach {
             val module = it.value.getConstructor().newInstance()
-            module.onCreate(this)
             instantiatedModules[it.key] = module
+        }
+
+        instantiatedModules.values.sortedBy { it.priority }.forEach { module ->
+            module.onCreate(this)
         }
     }
 
     override fun onTerminate() {
         // terminate and free modules
-        instantiatedModules.values.forEach {
+        instantiatedModules.values.sortedByDescending { it.priority }.forEach {
             it.onTerminate(this)
         }
         instantiatedModules.clear()

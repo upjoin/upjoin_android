@@ -16,4 +16,9 @@ interface ModuleLiveCycle {
      * Application onTerminate hook
      */
     fun onTerminate(application: ModulizedApplication) {}
+
+    /**
+     * Priority when loading the live cycle. The lower, the earlier it is loaded
+     */
+    val priority: Int get() = 1000
 }
