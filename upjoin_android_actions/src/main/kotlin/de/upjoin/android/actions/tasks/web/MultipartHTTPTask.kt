@@ -18,6 +18,16 @@ abstract class MultipartHTTPTask<T>(private val resultClass: Class<T>, private v
         urlConnection.requestMethod = "POST"
         urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=$boundary")
         urlConnection.setChunkedStreamingMode(-1) // use default chunk size
+
+        urlConnection.doInput = true
+        urlConnection.doOutput = true
+        urlConnection.instanceFollowRedirects = false
+        urlConnection.setRequestProperty("Connection", "Keep-Alive")
+        //urlConnection.setRequestProperty("Cache-Control", "no-cache");
+        //urlConnection.setRequestProperty( "charset", "utf-8");
+        //urlConnection.setFixedLengthStreamingMode(contentLength);
+        urlConnection.useCaches = false
+
         return@withContext urlConnection
     }
 
