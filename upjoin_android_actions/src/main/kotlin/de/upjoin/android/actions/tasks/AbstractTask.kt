@@ -19,6 +19,8 @@ abstract class AbstractTask<R>: Task<R> {
     var exception: Exception? = null
         protected set
 
+    override val callStack: MutableList<String> = mutableListOf()
+
     /**
      * Runs the tasks code block. The task is considered as failed if it returns null or
      * throws any exception.
@@ -71,6 +73,8 @@ abstract class AbstractTask<R>: Task<R> {
      * @param onSuccess callback for when the task execution succeeds
      */
     protected suspend fun <V> runTask(task: AbstractTask<V>, onError: OnErrorCallback<V>? = null, onSuccess: OnSuccessCallback<V>? = null): V? {
+        task.callStack.addAll(this.callStack)
+        task.callStack.add(this.javaClass.simpleName)
         return task.onSuccess {
             this@AbstractTask.collectedChangeEvents.addAll(task.collectedChangeEvents)
             onSuccess?.invoke(it)
@@ -99,6 +103,8 @@ abstract class AbstractTask<R>: Task<R> {
             onError?.invoke(it)
             result = false
         }
+        task.callStack.addAll(this.callStack)
+        task.callStack.add(this.javaClass.simpleName)
         task.run()
         return result
     }

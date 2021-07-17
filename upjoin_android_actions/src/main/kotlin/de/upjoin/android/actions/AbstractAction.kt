@@ -102,6 +102,7 @@ abstract class AbstractAction(override val context: Context) : Action {
             this@AbstractAction.collectedChangeEvents.addAll(task.collectedChangeEvents)
             onError?.invoke(it)
         }
+        task.callStack.add(this.javaClass.simpleName)
         return task.run()
     }
 
@@ -124,6 +125,7 @@ abstract class AbstractAction(override val context: Context) : Action {
             onError?.invoke(it)
             result = false
         }
+        task.callStack.add(this.javaClass.simpleName)
         task.run()
         return result
     }

@@ -1,11 +1,15 @@
 package de.upjoin.android.actions.tasks
 
+import java.util.*
+
 /**
  * Interface for a task
  *
  * @param R return type of the task execution
  */
 interface Task<R> {
+
+    val callStack: MutableList<String>
 
     /**
      * A set of change events collected while running this task

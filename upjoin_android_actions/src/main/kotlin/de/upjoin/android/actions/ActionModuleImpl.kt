@@ -4,6 +4,7 @@ import de.upjoin.android.actions.Action.SkipExecutionReason.*
 import de.upjoin.android.actions.tasks.Task
 import de.upjoin.android.actions.tasks.web.HTTPTask
 import de.upjoin.android.core.application.ModulizedApplication
+import de.upjoin.android.core.application.appInfoModule
 import de.upjoin.android.core.logging.Logger
 import de.upjoin.android.core.modules.ModuleLiveCycle
 
@@ -14,11 +15,13 @@ class ActionModuleImpl: ActionModule, ModuleLiveCycle {
     }
 
     override fun handleTaskExecuted(task: Task<*>) {
-        Logger.info(this, "Task $task executed.")
+        if (!appInfoModule.isDebug) return
+        Logger.debug(this, " - ${task.callStack.joinToString(separator = " - ")} - ${task.javaClass.simpleName} executed.")
     }
 
     override fun handleActionExecuted(action: Action) {
-        Logger.info(this, "Action $action executed.")
+        if (!appInfoModule.isDebug) return
+        Logger.debug(this, " + $action executed.")
     }
 
     override fun handleTaskFailure(task: Task<*>) {

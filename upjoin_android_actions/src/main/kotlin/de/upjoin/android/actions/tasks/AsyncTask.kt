@@ -9,9 +9,13 @@ open class AsyncTask<U, V>(val taskA: AbstractTask<U>, val taskB: AbstractTask<V
 
     override suspend fun runSecure(): TaskResult<U, V>? = withContext(Dispatchers.Default) {
         val jobA = async {
+            taskA.callStack.addAll(this@AsyncTask.callStack)
+            taskA.callStack.add(this@AsyncTask.javaClass.simpleName)
             taskA.run()
         }
         val jobB = async {
+            taskB.callStack.addAll(this@AsyncTask.callStack)
+            taskB.callStack.add(this@AsyncTask.javaClass.simpleName)
             taskB.run()
         }
 

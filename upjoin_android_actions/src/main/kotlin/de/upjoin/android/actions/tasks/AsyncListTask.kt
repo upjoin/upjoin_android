@@ -9,7 +9,11 @@ open class AsyncListTask(val tasks: Collection<AbstractTask<*>>): AbstractTask<B
 
     override suspend fun runSecure(): Boolean? = withContext(Dispatchers.Default) {
 
-        val jobs = tasks.map { async {it.run() }}
+        val jobs = tasks.map { async {
+            it.callStack.addAll(this@AsyncListTask.callStack)
+            it.callStack.add(this@AsyncListTask.javaClass.simpleName)
+            it.run()
+        }}
 
         val results = jobs.awaitAll()
         tasks.forEach { collectedChangeEvents.addAll(it.collectedChangeEvents) }
